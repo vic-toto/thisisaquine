@@ -1,0 +1,86 @@
+section .data
+    msg db "section .data%c    msg db %c%s%c, 10, 34, 34, 10", 10, 34, 34, 10
+    fmt db "%s", 10
+
+This data section is basically telling the computer "expect all this stuff". 
+msg is the variable name of our string, 
+db means "define byte", this specifies that we are defining bytes of data.
+`"section .data...": This is the string representing the source code of the program.
+, 10, 34, 34, 10: These are additional bytes representing the newline character (10) 
+and the double quote character (34). They are used for formatting purposes within the source code string.
+So, db is used to define the content of the msg
+The numbers, are ascii values 
+
+section .text
+    global _start
+
+The text section is where the actual executable code resides. 
+_start marks the entry point of the program 
+global directive is used to make symbols visible to the linker. 
+When you link your assembly program to create an executable file, the linker 
+needs to know where the program execution should begin. By declaring _start as global, 
+you're telling the linker that _start is the entry point of the program.
+mov rdx, msg.len loads the length of the msg variable into the
+
+Ready for below. 
+mov: instructions are used to move data between registers and memory.
+mov rax, 1 loads the syscall number for sys_write into the rax register.
+mov rdi, 1 loads the file descriptor for standard output (stdout) into the rdi register
+lea rsi, [msg] loads the address of the msg variable (which holds the source code of the program) into the rsi register.
+syscall instructions are used to invoke system calls.
+mov rax, 60 loads the syscall number for sys_exit into the 
+xor rdi, rdi clears the rdi register, setting the exit status to 0.
+syscall is called again to terminate the program.
+
+rax is one of the general-purpose registers available to the processor. 
+It's a 64-bit register, meaning it can hold 64 bits or 8 bytes of data.
+syscall number 1 to indicate a request for the sys_write syscall (writing data to a file descriptor).
+
+rdi is another general-purpose register in x86-64 assembly language. 
+Like rax, it's a 64-bit register and can hold 64 bits or 8 bytes of data.
+rdi basically sets up the rdi register with the appropriate value to be used 
+later when invoking the sys_write syscall.
+In this case, 1 is standard output
+
+lea: This is the instruction mnemonic for "load effective address". 
+Despite its name, lea doesn't actually perform memory access; instead, it calculates an address.
+
+rsi: This is the destination operand, specifically the rsi register.
+We're loading the effective address into the rsi register.
+The rsi register is one of the general-purpose registers in x86-64 assembly language. It's a 64-bit register, 
+meaning it can hold 64 bits or 8 bytes of data.
+
+[msg]: This is the source operand, specifically the memory location represented by the msg variable. 
+The brackets ([]) denote that we're referring to the memory location addressed by msg.
+
+mov: This is the instruction mnemonic for the move operation. It moves data from the second operand to the first operand.
+rdx: This is the destination operand, specifically the rdx register. We're moving data into the rdx register.
+msg.len: This is the source operand, specifically the length of the msg variable. 
+In assembly language, .len is an assembler directive used to calculate the length of a variable or string.
+So, mov rdx, msg.len calculates the length of the msg variable and moves that length value into the rdx register. 
+The length value stored in rdx will be used as a parameter when invoking the sys_write syscall to specify the 
+length of the message to be printed.
+
+_start:
+    mov rax, 1                  ; syscall number for sys_write
+    mov rdi, 1                  ; file descriptor 1 (stdout)
+    lea rsi, [msg]              ; address of msg
+    mov rdx, msg.len            ; message length
+    syscall                     ; invoke syscall
+
+    mov rax, 60                 ; syscall number for sys_exit
+    xor rdi, rdi                ; exit status 0
+    syscall                     ; invoke syscall
+
+syscall: This instruction invokes the syscall that was previously prepared. 
+In the preceding code, the sys_write syscall is invoked to print the source code of the program to the standard output.
+mov rax, 60: This instruction sets the value of the rax register to 60, which is the syscall number for sys_exit, 
+indicating that the program intends to exit.
+xor rdi, rdi: This instruction uses the xor operation to set the value of the rdi register to 0. 
+This action is performed to ensure that the rdi register contains the exit status, which in this case is 0, 
+indicating successful execution.
+syscall: Finally, another syscall instruction is executed, this time invoking the sys_exit syscall. 
+This syscall terminates the program, using the exit status specified in the rdi register (which is 0).
+
+so basically after start, we set the instructions and then with syscall say "go", then set other instructions and say go again
+and the second syscall is just to terminate the program and we're re-setting everything to 0 
