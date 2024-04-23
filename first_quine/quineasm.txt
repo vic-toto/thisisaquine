@@ -84,3 +84,6 @@ This syscall terminates the program, using the exit status specified in the rdi 
 
 so basically after start, we set the instructions and then with syscall say "go", then set other instructions and say go again
 and the second syscall is just to terminate the program and we're re-setting everything to 0 
+
+
+Hope this helped!
