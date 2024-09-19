@@ -1,8 +1,15 @@
-//
-//#define CODE "#include <stdio.h> %1$c%1$c #define CODE %c%s%c ; %1$c #define WRITE_TO_FILE() FILE *f = fopen(%cGrace_kid.c%c, %cw%c); fprintf(f, CODE, 10, 34, CODE, 34, 10, 34, 34, 34, 34); fclose(f); %1$c/*This is a quine*/%1$c WRITE_TO_FILE();";
-//#define FILE *f = fopen("Grace_kid.c", "w"); fprintf(f, CODE, 10, 34, CODE, 34, 10, 34, 34, 34, 34); fclose(f);
-///*This is a quine*/
-//WRITE_TO_FILE();
+#include <stdio.h>
+
+#define OPEN_FILE FILE *fd = fopen("Grace_kid.c", "w");
+#define CODE "#include <stdio.h>%1$c%1$c#define OPEN_FILE FILE *fd = fopen(%2$cGrace_kid.c%2$c, %2$cw%2$c);%1$c#define CODE %2$c%3$s%2$c%1$c#define WRITE_CODE fprintf(fd, CODE, 10, 34, CODE, 34); fclose(fd);%1$c/* This is a quine */%1$c__attribute__((constructor)) void init() { OPEN_FILE; WRITE_CODE; }%1$c"
+#define WRITE_CODE fprintf(fd, CODE, 10, 34, CODE); fclose(fd);
+
+/* This is a quine */
+__attribute__((constructor))
+void init() {
+    OPEN_FILE;
+    WRITE_CODE;
+}
 
 // %1$c: Represents a newline character (\n). 
 // It's commonly used to insert line breaks in the source code.
@@ -16,16 +23,5 @@
 // %4$d: Represents a decimal integer. 
 // It's used to insert an integer variable or literal in the source code.
 
-//so the numbers in fprinf are basically the ascii number of the placeholder it's holding. So 10 is \n and 34 is "
-#include <stdio.h>
-
-#define OPEN_FILE FILE *f = fopen("Grace_kid.c", "w");
-#define WRITE_CODE fprintf(f, CODE, 10, 34, CODE, 34, 10); fclose(f);
-#define CODE "#include <stdio.h>%c#define OPEN_FILE FILE *f = fopen(%cGrace_kid.c%c, %cw%c);%c#define WRITE_CODE fprintf(f, CODE, 10, 34, CODE, 34, 10); fclose(f);%c#define CODE %c%s%c%c/* This is the only comment in the program */%c__attribute__((constructor)) void init() {OPEN_FILE WRITE_CODE}%c"
-
-/* This is the only comment in the program */
-__attribute__((constructor))
-void init() {
-    OPEN_FILE
-    WRITE_CODE
-}
+//quick ASCII 
+// 10 new line , 34 double quotes

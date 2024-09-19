@@ -1,3 +1,5 @@
+DEBUGGING
+
 section .data
     msg db "section .data%c    msg db %c%s%c, 10, 34, 34, 10", 10, 34, 34, 10
     fmt db "%s", 10
