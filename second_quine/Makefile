@@ -1,5 +1,6 @@
 CC = clang            # Define the compiler to use
-CFLAGS = -Wall -Wextra -O2  # Compilation flags: Enable all warnings and optimize code
+CFLAGS = -Wall -Wextra -O2 -nostartfiles # Compilation flags: Enable all warnings and optimize code
+
 
 # Default target
 all: Grace
