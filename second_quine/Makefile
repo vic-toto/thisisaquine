@@ -1,6 +1,5 @@
-CC = clang            # Define the compiler to use
-CFLAGS = -Wall -Wextra -O2 -nostartfiles # Compilation flags: Enable all warnings and optimize code
-
+CC = clang
+CFLAGS = -Wall -Wextra -Werror
 
 # Default target
 all: Grace
@@ -15,6 +14,6 @@ run: Grace
 
 # Clean rule to remove generated files
 clean:
-	rm -f Grace Grace_kid.c Grace_kid.s
+	rm -f Grace Grace_kid.c
 
 .PHONY: all run clean

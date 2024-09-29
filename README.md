@@ -49,5 +49,3 @@ the program.
 set to 5 at first.
 
 
-# How to compile
-
