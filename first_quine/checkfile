@@ -12,15 +12,3 @@ int main() {
 void anotherFunction() {
     printf("This is a function");
 }
-
-// %1$c: Represents a newline character (\n). 
-// It's commonly used to insert line breaks in the source code.
-
-//%2$c: Represents a double quote character ("). 
-//It's used to insert double quotes in the source code.
-
-//%3$s: Represents a string. 
-//It's used to insert a string variable or literal in the source code.
-
-// %4$d: Represents a decimal integer. 
-// It's used to insert an integer variable or literal in the source code.
