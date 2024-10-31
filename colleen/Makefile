@@ -2,7 +2,7 @@ CC = clang
 ASM = nasm
 CFLAGS = -Wall -Wextra -Werror
 ASMFLAGS = -f elf64
-C_EXECUTABLE = Colleen_c
+C_EXECUTABLE = Colleen
 ASM_EXECUTABLE = Colleen_asm
 
 .PHONY: all clean fclean re c_quine asm_quine
@@ -10,7 +10,7 @@ ASM_EXECUTABLE = Colleen_asm
 all: c_quine asm_quine
 
 c_quine:
-	$(CC) $(CFLAGS) -o $(C_EXECUTABLE) quine.c
+	$(CC) $(CFLAGS) -o $(C_EXECUTABLE) Colleen.c
 
 asm_quine:
 	$(ASM) $(ASMFLAGS) -o Colleen.o quine.asm
