@@ -26,9 +26,9 @@ re: fclean all
 
 # Clean target (remove executables)
 clean:
-	rm -f $(EXECUTABLES)
+	rm -f $(EXECUTABLES) Grace_kid.c Sully_*
 
 # Force clean (remove executables)
 fclean: clean
 
-.PHONY: all clean fclean re Colleen Grace Sully
+.PHONY: all clean fclean re Colleen Grace Sully 
