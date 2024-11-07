@@ -48,4 +48,13 @@ the program.
 • You have no constraints on the source code, apart from the integer that will be
 set to 5 at first.
 
+COMPILE AND RUN 
 
+In the C directory, type "make all" in your terminal. 
+
+You can run each individual program by its name: 
+./Colleen 
+./Grace
+./Sully
+
+Eliminate all generated files and executables with "make fclean"
